@@ -1,0 +1,41 @@
+
+<main class="main">
+  <div class="content">
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div class="left-side">
+      <h1>NameServers</h1>
+    </div>
+    <div *ngIf="nameservers.length > 0">
+      <table mat-table [dataSource]="nameservers" class="mat-elevation-z8">
+      
+        <ng-container matColumnDef="hostName">
+          <th mat-header-cell *matHeaderCellDef> Host Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.hostName}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="ipAddress">
+          <th mat-header-cell *matHeaderCellDef> IP Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.ipAddress}} </td>
+          <a class="icon icon-delete hoverIcon">Delete</a>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="button">
+              <button mat-button (click)="deleteNameServer(element)"><i class="fa fa-delete"></i> Delete </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+      </table>
+      
+    </div>
+    <app-add-name-server (refreshTable)="getData()"></app-add-name-server>
+  </div>
+</main>
+
+<router-outlet></router-outlet>
